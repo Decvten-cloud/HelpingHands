@@ -1,100 +1,240 @@
-# Uluran Tangan (Donation Web App)
+#  HelpingHands
 
-A small Flask-based donation web application (Indonesian) with MySQL backend. The project includes user registration/login and several donation pages.
+> A full-stack donation platform built with **Flask** and **MySQL**, allowing users to securely donate to campaigns, manage their accounts, and track donation history.
 
-## Repository structure
+![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-2.x-black?logo=flask)
+![MySQL](https://img.shields.io/badge/MySQL-8-blue?logo=mysql)
 
-- `app.py` and `myapp/app.py` - Flask application entrypoints (duplicate copies; use one)
-- `myapp/controllers/controller.py` - Route handlers and view logic
-- `myapp/models/model.py` - Database functions (uses `flask_mysqldb`)
-- `templates/` and `static/` - HTML templates, CSS and JS assets
+---
 
-## Key features
+##  Overview
 
-- User registration and login (passwords hashed using Werkzeug)
-- Multiple donation pages (`donasikonten1` .. `donasikonten9`)
-- Saving donations into `donasi` table and showing donations on profile
+HelpingHands is a full-stack donation platform inspired by community crowdfunding websites. The application enables users to create accounts, browse donation campaigns, contribute securely, and manage their donation history.
 
-## Prerequisites
+This project demonstrates the development of a complete web application using **Flask**, **MySQL**, and a traditional server-rendered architecture with secure authentication and relational database design.
 
-- Python 3.8+
-- MySQL server
+---
 
-## Setup
+##  Features
 
-1. Create and activate a virtual environment:
+### User Authentication
+
+* Register new accounts
+* Secure login
+* Password hashing with Werkzeug
+* Session management
+* User profile
+
+### Donation Platform
+
+* Browse donation campaigns
+* Submit donations
+* Leave optional donation messages
+* View personal donation history
+
+### Database
+
+* Relational MySQL database
+* Foreign key relationships
+* User and donation management
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap
+* Jinja2
+
+### Backend
+
+* Python
+* Flask
+* Flask-MySQLdb
+* Werkzeug
+
+### Database
+
+* MySQL
+
+---
+
+##  System Architecture
+
+```text
+Browser
+      │
+      ▼
+ Flask Application
+      │
+      ▼
+Controller Layer
+      │
+      ▼
+ MySQL Database
+```
+
+The application follows an MVC-inspired architecture by separating presentation, routing, business logic, and database operations.
+
+---
+
+##  Security
+
+* Password hashing using Werkzeug
+* Session-based authentication
+* Protected user routes
+* Parameterized database queries
+* User-specific donation records
+
+---
+
+##  Screenshots
+
+> Add screenshots here.
+
+Suggested screenshots:
+
+* Landing Page
+* Login
+* Registration
+* Campaign Page
+* Donation Form
+* User Dashboard
+
+---
+
+##  Getting Started
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Decvten-cloud/HelpingHands.git
+
+cd HelpingHands
+```
+
+### Create Virtual Environment
 
 ```bash
 python -m venv venv
-# Windows
+```
+
+Windows
+
+```bash
 venv\Scripts\activate
-# macOS / Linux
+```
+
+Linux / macOS
+
+```bash
 source venv/bin/activate
 ```
 
-2. Install dependencies:
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Configure MySQL
+### Configure MySQL
 
-The app expects a MySQL database named `donation` and the connection configured in `app.py` / `myapp/app.py` (currently set to localhost, root, no password). Update the config if you use different credentials or host.
+Create a database named:
 
-Suggested SQL schema (run in your MySQL client):
-
-```sql
-CREATE DATABASE IF NOT EXISTS donation;
-USE donation;
-
-CREATE TABLE users (
-  user_id INT AUTO_INCREMENT PRIMARY KEY,
-  fullname VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  no_hp VARCHAR(50),
-  password VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE donasi (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  jumlah_donasi INT NOT NULL,
-  nama VARCHAR(255),
-  pesan TEXT,
-  user_id INT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
+```text
+donation
 ```
 
-4. Run the app
+Update your database configuration in:
 
-From the project root run (use either `app.py` at root or `myapp/app.py` — they are duplicates):
+```
+app.py
+```
+
+or
+
+```
+myapp/app.py
+```
+
+Run the application:
 
 ```bash
 python app.py
 ```
 
-Then open http://127.0.0.1:5000 in your browser.
+The application will be available at:
 
-## Notes and caveats
-
-- There are two copies of the Flask app (`app.py` and `myapp/app.py`). Keep only one to avoid confusion.
-- `myapp/models/model.py` imports `mysql` from `myapp.app`. If you run the root `app.py` instead of `myapp/app.py`, ensure imports resolve correctly (or update imports to import from `app` module path you use).
-- Passwords are hashed using Werkzeug; the code uses `check_password_hash` / `generate_password_hash`.
-- No tests are included.
-
-## Security
-
-- Do NOT run with debug=True in production.
-- Set a secure `app.secret_key` and avoid committing real credentials.
-- Use environment variables (e.g., via a `.env` file) for DB credentials and secret keys in production.
-
-## Improvements (suggested)
-
-- Deduplicate `app.py` files and centralize app factory pattern
-- Add input validation and better error handling
-- Add CSRF protection (e.g., Flask-WTF)
-- Add unit tests and CI workflow
+```
+http://127.0.0.1:5000
+```
 
 ---
+
+##  Project Structure
+
+```text
+HelpingHands/
+
+├── app.py
+├── myapp/
+│   ├── controllers/
+│   ├── models/
+│   ├── templates/
+│   └── static/
+│
+├── requirements.txt
+└── README.md
+```
+
+---
+
+##  What I Learned
+
+This project strengthened my understanding of:
+
+* Flask application architecture
+* Session-based authentication
+* Password hashing
+* CRUD application development
+* Relational database design
+* MVC-inspired project organization
+* SQL relationships
+* Jinja2 templating
+* Form validation
+* Full-stack web development
+
+---
+
+##  Future Improvements
+
+* Online payment integration
+* Admin dashboard
+* Campaign management
+* Email verification
+* Password reset
+* Docker deployment
+* REST API
+* Unit testing
+* CI/CD pipeline
+
+---
+
+##  License
+
+This project was created for educational and portfolio purposes.
+
+---
+
+##  Author
+
+**Faiq Octavian**
+
+* GitHub: https://github.com/Decvten-cloud
+* Portfolio: *(Coming Soon)*
+* LinkedIn: *(Coming Soon)*
